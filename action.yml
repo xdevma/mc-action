@@ -9,11 +9,19 @@ outputs:
   repo-id:
     description: "Staging repo ID"
     value: ${{ steps.staging.outputs.repo-id }}
+
 runs:
   using: "composite"
   steps:
     - run: sudo apt-get install -y python3 && pip3 install --user bs4 requests
       shell: bash
+    - name: Configure GPG Key
+      run: |
+        mkdir -p ~/.gnupg/
+        printf "$GPG_SIGNING_KEY" | base64 --decode > ~/.gnupg/private.key
+        gpg --import ~/.gnupg/private.key
+      env:
+        GPG_SIGNING_KEY: ${{ secrets.PGP_KEY }}
     - run: ${{ github.action_path }}/pull.sh ${{ inputs.version }}
       shell: bash
     - run: ${{ github.action_path }}/sign.sh
