@@ -1,7 +1,8 @@
 echo "stage artifacts dist/$1"
 cd dist/$1
+ls -lahn
 cp ../../start.xml start.xml
-curl --fail -X POST -d @start.xml -H "Content-Type:application/xml" -H "Authorization:Basic $2" https://oss.sonatype.org/service/local/staging/profiles/${3}/start -o ../finish.xml
+curl --fail -v -X POST -d @start.xml -H "Content-Type:application/xml" -H "Authorization:Basic $2" https://oss.sonatype.org/service/local/staging/profiles/${3}/start -o ../finish.xml
 rm start.xml
 find . -type f | sed -E s'@./@@' > ../artifacts.list
 staging_dir=$(echo $(awk -F '[<>]' '/stagedRepositoryId/{print $3}' ../finish.xml))
