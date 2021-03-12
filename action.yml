@@ -26,7 +26,7 @@ runs:
       shell: bash
     - run: ${{ github.action_path }}/pull.sh ${{ inputs.version }}
       shell: bash
-    - run: ${{ github.action_path }}/sign.sh
+    - run: ${{ github.action_path }}/sign.sh ${{ inputs.sona }} ${{ inputs.profile }} 
       shell: bash
     - id: staging
       run: echo "::set-output name=repo-id::$(echo macy-100)"
