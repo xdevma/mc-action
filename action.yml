@@ -5,6 +5,9 @@ inputs:
     description: 'version of artifacts'
     required: true
     default: 'version'
+  gpg_key:  # id of input
+    description: 'gpg key'
+    required: true
 outputs:
   repo-id:
     description: "Staging repo ID"
@@ -18,7 +21,7 @@ runs:
     - name: Configure GPG Key
       run: |
         mkdir -p ~/.gnupg/
-        printf ${{ inputs.version }} | base64 --decode > ~/.gnupg/private.key
+        printf ${{ inputs.gpg_key }} | base64 --decode > ~/.gnupg/private.key
         gpg --import ~/.gnupg/private.key
       shell: bash
     - run: ${{ github.action_path }}/pull.sh ${{ inputs.version }}
