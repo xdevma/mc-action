@@ -22,5 +22,5 @@ mkdir .m2/
 cd .m2/
 
 tar xvf ../mavem-archive.tar.gz
-
+find . -type f -name '._*' -delete
 find . -type f | grep -v "md5\|sha1$" | sed -E s'@./@@' > ../artifacts.list
