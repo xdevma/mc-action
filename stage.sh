@@ -1,4 +1,5 @@
 echo "stage artifacts"
+cd dist/$1
 cp ../../start.xml start.xml
 curl --fail -X POST -d @start.xml -H "Content-Type:application/xml" -H "Authorization:Basic $1" https://oss.sonatype.org/service/loca
 rm start.xml
