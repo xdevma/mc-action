@@ -12,7 +12,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: apt-get install -y python3 openssh openssh-clients && pip3 install --user bs4 requests
+    - run: sudo apt-get install -y python3 openssh openssh-clients && pip3 install --user bs4 requests
       shell: bash
     - run: ${{ github.action_path }}/pull.sh ${{ inputs.version }}
       shell: bash
