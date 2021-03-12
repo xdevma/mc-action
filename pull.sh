@@ -4,6 +4,7 @@ set -o pipefail
 echo "Pull artifacts"
 echo $GITHUB_EVENT_PATH 
 jq .release.assets $GITHUB_EVENT_PATH
+
 asset_id=$(jq ".release.assets | map(select(.name == \"mavem-archive.tar.gz\"))[0].id" $GITHUB_EVENT_PATH)
 if [ "$asset_id" = "null" ]; then
   echo "no asset."
