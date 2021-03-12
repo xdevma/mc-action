@@ -8,6 +8,12 @@ inputs:
   gpg_key:  # id of input
     description: 'gpg key'
     required: true
+  profile:  # id of input
+    description: 'Profile'
+    required: true
+  sona:  # id of input
+    description: 'creds'
+    required: true
 outputs:
   repo-id:
     description: "Staging repo ID"
