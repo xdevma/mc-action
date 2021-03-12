@@ -1,0 +1,25 @@
+name: 'Maven Central Action'
+description: 'Publish Maven artifact to Maven Central'
+inputs:
+  version:  # id of input
+    description: 'version of artifacts'
+    required: true
+    default: 'version'
+outputs:
+  repo-id:
+    description: "Staging repo ID"
+    value: ${{ steps.staging.outputs.repo-id }}
+runs:
+  using: "composite"
+  steps:
+    - run: yum install -y python3 openssh openssh-clients && pip3 install  --user bs4 requests
+      shell: bash
+    - run: ${{ github.action_path }}/pull.sh ${{ inputs.version }}
+      shell: bash
+    - run: ${{ github.action_path }}/sign.sh
+      shell: bash
+    - id: staging
+      run: echo "::set-output name=repo-id::$(echo macy-100)"
+      shell: bash
+    - run: ${{ github.action_path }}/release.sh ${{ steps.staging.outputs.repo-id }}
+      shell: bash
