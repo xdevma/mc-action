@@ -16,7 +16,7 @@ fi;
 
 ASSET_LINK="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/assets/${asset_id}"
 
-curl -L -H  "Authorization: token $2" -H "Accept:application/octet-stream" -o "mavem-archive.tar.gz" ${ASSET_URL}
+curl -L -H  "Authorization: token $2" -H "Accept:application/octet-stream" -o "mavem-archive.tar.gz" ${ASSET_LINK}
 
 mkdir .m2/
 cd .m2/
