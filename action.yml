@@ -22,7 +22,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: sudo apt-get install -y python3 && pip3 install --user bs4 requests
+    - run: sudo apt-get install -y jq
       shell: bash
     - name: Configure GPG Key
       run: |
@@ -35,7 +35,7 @@ runs:
     - run: ${{ github.action_path }}/sign.sh ${{ inputs.version }}
       shell: bash
     - id: staging
-      run: ${{ github.action_path }}/stage.sh ${{ inputs.version }} ${{ inputs.sona }} ${{ inputs.profile }} && echo "::set-output name=repo-id::$(echo $(awk -F '[<>]' '/stagedRepositoryId/{print $3}' dist/finish.xml))" 
+      run: ${{ github.action_path }}/stage.sh ${{ inputs.version }} ${{ inputs.sona }} ${{ inputs.profile }} && echo "::set-output name=repo-id::$(echo $(awk -F '[<>]' '/stagedRepositoryId/{print $3}' ./finish.xml))" 
       shell: bash
     - run: ${{ github.action_path }}/release.sh ${{ steps.staging.outputs.repo-id }}
       shell: bash
