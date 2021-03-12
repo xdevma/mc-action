@@ -14,6 +14,9 @@ inputs:
   sona:  # id of input
     description: 'creds'
     required: true
+  gtoken:  # id of input
+    description: 'github token'
+    required: true
 outputs:
   repo-id:
     description: "Staging repo ID"
@@ -30,7 +33,7 @@ runs:
         printf ${{ inputs.gpg_key }} | base64 --decode > ~/.gnupg/private.key
         gpg --import ~/.gnupg/private.key
       shell: bash
-    - run: ${{ github.action_path }}/pull.sh ${{ inputs.version }}
+    - run: ${{ github.action_path }}/pull.sh ${{ inputs.version }} ${{inputs.gtoken}}
       shell: bash
     - run: ${{ github.action_path }}/sign.sh ${{ inputs.version }}
       shell: bash
