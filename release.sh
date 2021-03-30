@@ -4,9 +4,9 @@ set -oe pipefail
 echo "release artifacts $3"
 echo "<promoteRequest>" > promote.xml
 echo "<data>" >> promote.xml
-echo "<stagedRepositoryId>$3</stagedRepositoryId>" >> promote.xml
+echo "<stagedRepositoryId>content/repositories/$3</stagedRepositoryId>" >> promote.xml
 echo "<description>Release</description>" >> promote.xml
-echo "<targetRepositoryId>release</targetRepositoryId>" >> promote.xml
+echo "<targetRepositoryId>service/local/staging/deploy/maven2</targetRepositoryId>" >> promote.xml
 echo "</data>" >> promote.xml
 echo "</promoteRequest>" >> promote.xml
 cat promote.xml
