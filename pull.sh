@@ -1,5 +1,6 @@
-set -e
-set -o pipefail
+#!/usr/bin/env bash
+
+set -oe pipefail
 
 echo "Pull artifacts"
 echo $GITHUB_EVENT_PATH 
@@ -22,5 +23,5 @@ mkdir .m2/
 cd .m2/
 
 tar xvf ../mavem-archive.tar.gz
-find . -type f -name '._*' -delete
+find . -type f -name '._*' -delete # remove macos attribute artifacts, TODO remove when moving to packaging on linux 
 find . -type f | grep -v "md5\|sha1$" | sed -E s'@./@@' > ../artifacts.list

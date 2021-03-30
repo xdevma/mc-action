@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo "stage artifacts"
 cd .m2/
 ls -lahn

@@ -40,5 +40,3 @@ runs:
     - id: staging
       run: ${{ github.action_path }}/stage.sh ${{ inputs.version }} ${{ inputs.sona }} ${{ inputs.profile }} && echo "::set-output name=repo-id::$(echo $(awk -F '[<>]' '/stagedRepositoryId/{print $3}' ./finish.xml))" 
       shell: bash
-    - run: ${{ github.action_path }}/release.sh ${{ steps.staging.outputs.repo-id }}
-      shell: bash
