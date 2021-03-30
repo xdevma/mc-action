@@ -2,9 +2,8 @@
 set -oe pipefail
 
 echo "release artifacts $3"
-
-
-curl --fail -v -H "Authorization:Basic $1" 'https://oss.sonatype.org/service/local/staging/bulk/promote' -H 'Accept: application/json,application/vnd.siesta-error-v1+json,application/vnd.siesta-validation-errors-v1+json' -H 'Content-Type: application/json' --data-raw '{"data":{"autoDropAfterRelease":true,"description":"Release","stagedRepositoryIds":["${3}"]}}' 
+curl --fail -v -H "Authorization:Basic $1" -X POST 'https://oss.sonatype.org/service/local/staging/bulk/promote' -H 'Accept: application/json,application/vnd.siesta-error-v1+json,application/vnd.siesta-validation-errors-v1+json' -H 'Content-Type: application/json' --data-raw '{"data":{"autoDropAfterRelease":true,"description":"Release","stagedRepositoryIds":["${3}"]}}'
+#curl --fail -v -H "Authorization:Basic $1" -X POST'https://oss.sonatype.org/service/local/staging/bulk/promote' -H 'Accept: application/json,application/vnd.siesta-error-v1+json,application/vnd.siesta-validation-errors-v1+json' -H 'Content-Type: application/json' --data '{"data":{"autoDropAfterRelease":true,"description":"Release","stagedRepositoryIds":["macy-1026"]}}' 
 #curl --fail -v  -H "Content-Type: application/json" -X POST --data '{"data":{"autoDropAfterRelease":true,"description":"Release","stagedRepositoryIds":["$3"]}}'  https://oss.sonatype.org/service/local/staging/bulk/promote
 
 #echo "<promoteRequest>" > promote.xml
