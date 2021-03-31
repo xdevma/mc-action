@@ -7,7 +7,7 @@ inputs:
   sona:  # id of input
     description: 'creds'
     required: true
-  repoid:  # id of input
+  repo-id:  # id of input
     description: 'repoid'
     required: true
 runs:
